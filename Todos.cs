@@ -17,6 +17,7 @@ namespace TodoList
         private IRepository<TodoModel> repository;
         private Mode Status = Mode.Add;
         private XMLRepository xMLRepository = new XMLRepository();
+        private int curId;
 
 
         public Todos(IRepository<TodoModel> repository)
@@ -63,6 +64,7 @@ namespace TodoList
             Status = Mode.Add;
             ResetTheTask();
             ButtonDelete.Enabled = false;
+            curId = -1;
         }
 
         private void button_action_Click(object sender, EventArgs e)
@@ -123,9 +125,11 @@ namespace TodoList
         {
             if (Status == Mode.Edit)
             {
-                int id = 1;
+                int id = curId;
                 XMLRepository xMLRepository = new XMLRepository();
                 xMLRepository.DeleteById(id);
+                dataGridView_tasks.DataSource = xMLRepository.GetAll();
+                SetMode(Mode.Add);
             }
         }
         private void dataGridViewDisplay_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -134,11 +138,8 @@ namespace TodoList
         }
         private void dataGridView_tasks_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show(e.RowIndex.ToString());
-            MessageBox.Show("");
-
-            //this.dataGridView_tasks.CurrentRow.Cells[0].Value;
-
+            curId = (int)this.dataGridView_tasks.CurrentRow.Cells[0].Value;
+            SetMode(Mode.Edit);
         }
     }
 }
