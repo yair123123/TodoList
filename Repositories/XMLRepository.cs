@@ -5,6 +5,7 @@ namespace TodoList.Repositories
     {
         public TodoModel Add(TodoModel todo)
         {
+            Console.WriteLine("123");
             throw new NotImplementedException();
         }
 
