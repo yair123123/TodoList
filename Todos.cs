@@ -1,4 +1,5 @@
 ﻿using ReaLTaiizor.Forms;
+using System.Threading.Tasks;
 using TodoList.Repositories;
 
 namespace TodoList
@@ -46,22 +47,47 @@ namespace TodoList
 
         private void button_action_Click(object sender, EventArgs e)
         {
+            if (true)
+            {
             AddEvent();
+            }
+            if (false)
+            {
+                EditEvent();
+               
+            }
         }
 
-        private TodoModel AddEvent()
+        private void EditEvent()
+        {
+            ShowTheTask();
+
+        }
+
+        private void AddEvent()
+        {
+            TodoModel myTask = CreateTodoModel();
+
+        }
+
+        private TodoModel CreateTodoModel()
         {          
             DateOnly date = DateOnly.FromDateTime(hopeDatePicker.Date);
             string Task = textboxTask.Text;
             TodoModel todos = new TodoModel(Task, date);
-
+            return todos;
         }
 
         private void checkbox_isDone_CheckedChanged(object sender, EventArgs e)
         {
             XMLRepository xMLRepository = new XMLRepository();
             xMLRepository.DeleteById(1);
-
         }
+
+
     }
 }
+///=======
+///>>>>>>> 3a59ed724c066067ec9d11af64c15a495a8660cc
+
+//<<<<<<< HEAD
