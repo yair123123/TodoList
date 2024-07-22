@@ -1,6 +1,7 @@
 ﻿using ReaLTaiizor.Forms;
 using System.Threading.Tasks;
 using TodoList.Repositories;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TodoList
 {
@@ -14,6 +15,9 @@ namespace TodoList
         private List<TodoModel> todos;
         private Mode mode;
         private IRepository<TodoModel> repository;
+        private string Status = "add";
+        private XMLRepository xMLRepository = new XMLRepository();
+
 
         public Todos(IRepository<TodoModel> repository)
         {
@@ -47,14 +51,14 @@ namespace TodoList
 
         private void button_action_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (Status == "add")
             {
-            AddEvent();
+                AddEvent();
             }
-            if (false)
+            if (Status == "edit")
             {
                 EditEvent();
-               
+
             }
         }
 
@@ -63,15 +67,39 @@ namespace TodoList
             ShowTheTask();
 
         }
+        private void StatusChange(string status)
+        {
+            switch(status)
+            {
+                case "edit":
+                    Status = "edit";
+                    ShowTheTask();
+                    break;
+
+                case "add":
+                    Status = "add";
+                    ResetTheTask();
+                    break;
+                }
+        }
+        private void ShowTheTask()
+        {
+            textboxTask.Text = string.Empty;
+        }
+        private void ResetTheTask()
+        {
+            textboxTask.Text = string.Empty;
+        }
+
 
         private void AddEvent()
         {
             TodoModel myTask = CreateTodoModel();
-
+            xMLRepository.Add(myTask);
         }
 
         private TodoModel CreateTodoModel()
-        {          
+        {
             DateOnly date = DateOnly.FromDateTime(hopeDatePicker.Date);
             string Task = textboxTask.Text;
             TodoModel todos = new TodoModel(Task, date);
@@ -80,11 +108,18 @@ namespace TodoList
 
         private void checkbox_isDone_CheckedChanged(object sender, EventArgs e)
         {
-            XMLRepository xMLRepository = new XMLRepository();
-            xMLRepository.DeleteById(1);
+
         }
 
-
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                int id = 1;
+                XMLRepository xMLRepository = new XMLRepository();
+                xMLRepository.DeleteById(id);
+            }
+        }
     }
 }
 ///=======
