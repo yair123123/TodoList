@@ -27,8 +27,9 @@ namespace TodoList
         public string DateString
         {
             get => Date.ToString("yyyy-MM-dd");
-            set => Date.ToString(value);
+            set => Date = DateOnly.Parse(value);
         }
+
 
         public TodoModel(string title, DateOnly date, bool done = false)
         {

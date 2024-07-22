@@ -9,7 +9,7 @@ namespace TodoList.Repositories
 
         public void Add(TodoModel todo)
         {
-            todo.Id = _id++;
+            //todo.Id = _id++;
             XmlSerializer listSerializer = new XmlSerializer(typeof(TodoListModel));
             XmlSerializer itemSerializer = new XmlSerializer(typeof(TodoModel));
 
@@ -44,6 +44,8 @@ namespace TodoList.Repositories
             {
                 todoList = new TodoListModel();
             }
+
+
             int _id = todoList.Todos.LastOrDefault().Id;
             if (todo.Id == null)
             {
@@ -56,8 +58,7 @@ namespace TodoList.Repositories
                 listSerializer.Serialize(writer, todoList);
             }
         }
-
-
+        
         public void DeleteById(int id)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(TodoListModel));
