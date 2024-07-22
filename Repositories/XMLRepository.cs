@@ -9,7 +9,7 @@ namespace TodoList.Repositories
 
         public void Add(TodoModel todo)
         {
-            todo.Id = _id++;
+            //todo.Id = _id++;
             XmlSerializer listSerializer = new XmlSerializer(typeof(TodoListModel));
             XmlSerializer itemSerializer = new XmlSerializer(typeof(TodoModel));
 
@@ -19,6 +19,7 @@ namespace TodoList.Repositories
             {
                 try
                 {
+                    
                     using (StreamReader reader = new StreamReader("todo.xml"))
                     {
                         try
