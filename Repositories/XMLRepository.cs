@@ -79,13 +79,16 @@ namespace TodoList.Repositories
         {
             XmlSerializer serializer = new XmlSerializer(typeof(TodoListModel));
             TodoListModel todoList;
+
             using (StreamReader reader = new StreamReader("todo.xml"))
             {
                 todoList = (TodoListModel)serializer.Deserialize(reader);
-                //todoList.Todos = todoList.Todos.ToList();
             }
+
+            // החזרת רשימת TodoModel מתוך TodoListModel
             return todoList.Todos;
         }
+
 
         public List<TodoModel> GetAll(Func<TodoModel, bool> predicate)
         {

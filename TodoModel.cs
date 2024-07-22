@@ -23,7 +23,7 @@ namespace TodoList
         [XmlIgnore]
         public DateOnly Date { get; set; }
 
-        [XmlElement("Date")]
+
         public string DateString
         {
             get => Date.ToString("yyyy-MM-dd");

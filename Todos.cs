@@ -24,6 +24,7 @@ namespace TodoList
             InitializeComponent();
             todos = new List<TodoModel>();
             dataGridView_tasks.DataSource = xMLRepository.GetAll();
+            dataGridView_tasks.Columns["Date"].Visible = false;
             this.repository = repository;
         }
 
@@ -95,6 +96,7 @@ namespace TodoList
             // add to xml
             //and then cgnge back to add mode
             dataGridView_tasks.DataSource = xMLRepository.GetAll();
+            dataGridView_tasks.Columns["Date"].Visible = false;
 
             SetMode(Mode.Add);
         }
