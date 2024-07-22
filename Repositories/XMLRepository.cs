@@ -19,6 +19,7 @@ namespace TodoList.Repositories
             {
                 try
                 {
+                    
                     using (StreamReader reader = new StreamReader("todo.xml"))
                     {
                         try
