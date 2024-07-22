@@ -64,9 +64,13 @@ namespace TodoList
 
         private void EditEvent()
         {
-            ShowTheTask();
+            StatusChange("edit");
+            // add to xml
+            //and then cgnge back to add mode
 
+            StatusChange("add");
         }
+
         private void StatusChange(string status)
         {
             switch(status)
@@ -74,11 +78,15 @@ namespace TodoList
                 case "edit":
                     Status = "edit";
                     ShowTheTask();
+                    button_action.Text = "edit";
+                    ButtonDelete.Enabled = true;
                     break;
 
                 case "add":
                     Status = "add";
                     ResetTheTask();
+                    button_action.Text = "add";
+                    ButtonDelete.Enabled = false;
                     break;
                 }
         }
@@ -113,7 +121,7 @@ namespace TodoList
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (Status == "edit")
             {
                 int id = 1;
                 XMLRepository xMLRepository = new XMLRepository();

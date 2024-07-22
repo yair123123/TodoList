@@ -173,7 +173,7 @@
             button_action.NoAccentTextColor = Color.Empty;
             button_action.Size = new Size(85, 36);
             button_action.TabIndex = 7;
-            button_action.Text = "ADD|EDIT";
+            button_action.Text = "ADD";
             button_action.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             button_action.UseAccentColor = false;
             button_action.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             ButtonDelete.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             ButtonDelete.Name = "ButtonDelete";
             ButtonDelete.NoAccentTextColor = Color.Empty;
-            ButtonDelete.Size = new Size(85, 36);
+            ButtonDelete.Size = new Size(73, 36);
             ButtonDelete.TabIndex = 8;
             ButtonDelete.Text = "Delete";
             ButtonDelete.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
