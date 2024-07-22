@@ -33,7 +33,11 @@ namespace TodoList.Repositories
                             todoList = new TodoListModel();
                             todoList.Todos.Add(existingTodo);
                         }
-                     _id = todoList.Todos.LastOrDefault().Id+1;
+                        if (todoList.Todos.Count > 0)
+                        {
+                            _id = todoList.Todos.LastOrDefault().Id + 1;
+                        }
+                        else { _id = 0; }
                     }
                 }
                 catch (Exception ex)
