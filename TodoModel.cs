@@ -11,19 +11,17 @@ namespace TodoList
         [XmlElement("Title")] 
         public string Title { get; set; }
 
-        [XmlElement("Date")] 
-        public string XmlDate
-        {
-            get { return Date.ToString("yyyy-MM-dd"); } 
-            set { Date = DateOnly.Parse(value); } 
-        }
-
-        [XmlIgnore] 
+        [XmlElement("Done")]
+        public bool Done;
+        
+        
         public DateOnly Date { get; set; }
 
-        public TodoModel()
+        public TodoModel(string title, DateOnly date, bool done = false)
         {
-
+            Title = title;
+            Date = date;
+            Done = done;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿
+﻿using System.Xml.Linq;
+using System.Xml.Serialization;
+
+
 namespace TodoList.Repositories
 {
     internal class XMLRepository : IRepository<TodoModel>
@@ -6,8 +9,18 @@ namespace TodoList.Repositories
 
         public TodoModel Add(TodoModel todo)
         {
-            Console.WriteLine("21346");
-            throw new NotImplementedException();
+            todo.Id = 1;
+            XmlSerializer serializer = new XmlSerializer(typeof(TodoModel));
+            using (StreamWriter writer = new StreamWriter("todo.xml"))
+            {
+                serializer.Serialize(writer, todo);
+            }
+            XmlSerializer newserializer = new XmlSerializer(typeof(TodoModel));
+            using (StreamReader reader = new StreamReader("todo.xml"))
+            {
+                todo = (TodoModel)serializer.Deserialize(reader);
+            }
+            return todo;
         }
 
         public void DeleteById(int id)

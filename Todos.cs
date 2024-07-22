@@ -61,6 +61,7 @@ namespace TodoList
         {
             XMLRepository xMLRepository = new XMLRepository();
             xMLRepository.DeleteById(1);
+
         }
     }
 }
