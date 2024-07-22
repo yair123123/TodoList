@@ -76,6 +76,7 @@ namespace TodoList
             }
             if (Status == Mode.Edit)
             {
+
                 EditEvent();
 
             }
@@ -94,7 +95,11 @@ namespace TodoList
 
         private void EditEvent()
         {
-            SetMode(Mode.Edit);
+
+            TodoModel UpdatedModel = CreateTodoModel();
+            xMLRepository.DeleteById(curId);
+            xMLRepository.Add(UpdatedModel);
+            //SetMode(Mode.Edit);
             // add to xml
             //and then cgnge back to add mode
             dataGridView_tasks.DataSource = xMLRepository.GetAll();
@@ -127,7 +132,7 @@ namespace TodoList
             if (Status == Mode.Edit)
             {
                 int id = curId;
-                XMLRepository xMLRepository = new XMLRepository();
+                //XMLRepository xMLRepository = new XMLRepository();
                 xMLRepository.DeleteById(id);
                 dataGridView_tasks.DataSource = xMLRepository.GetAll();
                 SetMode(Mode.Add);
