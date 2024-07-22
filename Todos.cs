@@ -107,6 +107,7 @@ namespace TodoList
         private TodoModel CreateTodoModel()
         {
             DateOnly date = DateOnly.FromDateTime(hopeDatePicker.Date);
+            MessageBox.Show(date.ToString());
             string Task = textboxTask.Text;
             TodoModel todos = new TodoModel(Task, date);
             return todos;

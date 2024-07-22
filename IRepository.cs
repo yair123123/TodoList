@@ -10,7 +10,7 @@
     internal interface IRepository<T>
     {
         T GetById(int id);
-        T Update(T todo);
+        void Update(T todo);
         void Add(T todo);
         void DeleteById(int id);
         List<T> GetAll();

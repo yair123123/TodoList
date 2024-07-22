@@ -6,10 +6,10 @@ namespace TodoList.Repositories
 {
     internal class XMLRepository : IRepository<TodoModel>
     {
-        int _id = 0;
+
         public void Add(TodoModel todo)
         {
-            todo.Id = _id++;
+
             XmlSerializer listSerializer = new XmlSerializer(typeof(TodoListModel));
             XmlSerializer itemSerializer = new XmlSerializer(typeof(TodoModel));
 
@@ -38,12 +38,17 @@ namespace TodoList.Repositories
                     Console.WriteLine($"Error reading XML: {ex.Message}");
                     todoList = new TodoListModel();
                 }
+
             }
             else
             {
                 todoList = new TodoListModel();
             }
-
+            int _id = todoList.Todos.LastOrDefault().Id;
+            if (todo.Id == null)
+            {
+                todo.Id = _id++;
+            }
             todoList.Todos.Add(todo);
 
             using (StreamWriter writer = new StreamWriter("todo.xml"))
@@ -87,12 +92,22 @@ namespace TodoList.Repositories
 
         public TodoModel GetById(int id)
         {
-            throw new NotImplementedException();
+            TodoModel get;
+            XmlSerializer serializer = new XmlSerializer(typeof(TodoListModel));
+            TodoListModel todoList;
+            using (StreamReader reader = new StreamReader("todo.xml"))
+            {
+                todoList = (TodoListModel)serializer.Deserialize(reader);
+                get = todoList.Todos.SingleOrDefault(todo => todo.Id == id);
+            }
+            return get;
         }
 
-        public TodoModel Update(TodoModel todo)
+        public void Update(TodoModel todo)
         {
-            throw new NotImplementedException();
+           TodoModel Get =  GetById(todo.Id);
+           DeleteById(todo.Id);
+           Add(Get);
         }
     }
 }

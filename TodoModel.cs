@@ -18,9 +18,17 @@ namespace TodoList
 
         [XmlElement("Done")]
         public bool Done;
-        
-        
+
+
+        [XmlIgnore]
         public DateOnly Date { get; set; }
+
+        [XmlElement("Date")]
+        public string DateString
+        {
+            get => Date.ToString("yyyy-MM-dd");
+            set => Date.ToString(value);
+        }
 
         public TodoModel(string title, DateOnly date, bool done = false)
         {
