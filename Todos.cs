@@ -1,4 +1,6 @@
-﻿using ReaLTaiizor.Forms;
+﻿using ReaLTaiizor.Controls;
+using ReaLTaiizor.Forms;
+using System;
 using System.Threading.Tasks;
 using TodoList.Repositories;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -17,7 +19,9 @@ namespace TodoList
         private IRepository<TodoModel> repository;
         private Mode Status = Mode.Add;
         private XMLRepository xMLRepository = new XMLRepository();
+        private DateTime curDate;
         private int curId;
+        private string curTask;
 
 
         public Todos(IRepository<TodoModel> repository)
@@ -53,6 +57,7 @@ namespace TodoList
 
         private void SetEditMode()
         {
+            hopeDatePicker.Date = curDate;
             button_action.Text = "Edit";
             Status = Mode.Edit;
             ShowTheTask();
@@ -86,7 +91,7 @@ namespace TodoList
 
         private void ShowTheTask()
         {
-            textboxTask.Text = string.Empty;
+            textboxTask.Text = curTask;
         }
         private void ResetTheTask()
         {
@@ -99,9 +104,6 @@ namespace TodoList
             TodoModel UpdatedModel = CreateTodoModel();
             xMLRepository.DeleteById(curId);
             xMLRepository.Add(UpdatedModel);
-            //SetMode(Mode.Edit);
-            // add to xml
-            //and then cgnge back to add mode
             dataGridView_tasks.DataSource = xMLRepository.GetAll();
             dataGridView_tasks.Columns["Date"].Visible = false;
 
@@ -138,12 +140,13 @@ namespace TodoList
                 SetMode(Mode.Add);
             }
         }
-        private void dataGridViewDisplay_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            MessageBox.Show("dataGridViewDisplay_CellClick");
-        }
+
         private void dataGridView_tasks_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            DateOnly taskDate = (DateOnly)this.dataGridView_tasks.CurrentRow.Cells[2].Value;
+            MessageBox.Show(taskDate.ToString() +  " " + taskDate.GetType().ToString());
+            curDate = taskDate.ToDateTime(TimeOnly.MinValue);
+            curTask = (string)this.dataGridView_tasks.CurrentRow.Cells[1].Value;
             curId = (int)this.dataGridView_tasks.CurrentRow.Cells[0].Value;
             SetMode(Mode.Edit);
         }
