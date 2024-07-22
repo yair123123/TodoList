@@ -35,6 +35,7 @@
             checkbox_isDone = new ReaLTaiizor.Controls.MaterialCheckBox();
             dataGridView_tasks = new DataGridView();
             button_action = new ReaLTaiizor.Controls.MaterialButton();
+            ButtonDelete = new ReaLTaiizor.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView_tasks).BeginInit();
             SuspendLayout();
             // 
@@ -178,11 +179,33 @@
             button_action.UseVisualStyleBackColor = true;
             button_action.Click += button_action_Click;
             // 
+            // ButtonDelete
+            // 
+            ButtonDelete.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ButtonDelete.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            ButtonDelete.Depth = 0;
+            ButtonDelete.HighEmphasis = true;
+            ButtonDelete.Icon = null;
+            ButtonDelete.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            ButtonDelete.Location = new Point(255, 1252);
+            ButtonDelete.Margin = new Padding(10, 11, 10, 11);
+            ButtonDelete.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            ButtonDelete.Name = "ButtonDelete";
+            ButtonDelete.NoAccentTextColor = Color.Empty;
+            ButtonDelete.Size = new Size(85, 36);
+            ButtonDelete.TabIndex = 8;
+            ButtonDelete.Text = "Delete";
+            ButtonDelete.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            ButtonDelete.UseAccentColor = false;
+            ButtonDelete.UseVisualStyleBackColor = true;
+            ButtonDelete.Click += ButtonDelete_Click;
+            // 
             // Todos
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1879, 1428);
+            Controls.Add(ButtonDelete);
             Controls.Add(button_action);
             Controls.Add(dataGridView_tasks);
             Controls.Add(checkbox_isDone);
@@ -208,5 +231,6 @@
         private ReaLTaiizor.Controls.MaterialCheckBox checkbox_isDone;
         private DataGridView dataGridView_tasks;
         private ReaLTaiizor.Controls.MaterialButton button_action;
+        private ReaLTaiizor.Controls.MaterialButton ButtonDelete;
     }
 }
