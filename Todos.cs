@@ -15,7 +15,7 @@ namespace TodoList
         private List<TodoModel> todos;
         private Mode mode;
         private IRepository<TodoModel> repository;
-        private string Status = "add";
+        private Mode Status = Mode.Add;
         private XMLRepository xMLRepository = new XMLRepository();
 
 
@@ -41,21 +41,37 @@ namespace TodoList
             switch (mode)
             {
                 case Mode.Add:
-                    button_action.Text = "Add";
+                    SetAddMode();
                     break;
                 case Mode.Edit:
-                    button_action.Text = "Edit";
+                    SetEditMode();
                     break;
             }
         }
 
+        private void SetEditMode()
+        {
+            button_action.Text = "Edit";
+            Status = Mode.Edit;
+            ShowTheTask();
+            ButtonDelete.Enabled = true;
+        }
+
+        private void SetAddMode()
+        {
+            button_action.Text = "Add";
+            Status = Mode.Add;
+            ResetTheTask();
+            ButtonDelete.Enabled = false;
+        }
+
         private void button_action_Click(object sender, EventArgs e)
         {
-            if (Status == "add")
+            if (Status == Mode.Add)
             {
                 AddEvent();
             }
-            if (Status == "edit")
+            if (Status == Mode.Edit)
             {
                 EditEvent();
 
@@ -64,32 +80,14 @@ namespace TodoList
 
         private void EditEvent()
         {
-            StatusChange("edit");
+            SetMode(Mode.Edit);
             // add to xml
             //and then cgnge back to add mode
 
-            StatusChange("add");
+            SetMode(Mode.Add);
         }
 
-        private void StatusChange(string status)
-        {
-            switch(status)
-            {
-                case "edit":
-                    Status = "edit";
-                    ShowTheTask();
-                    button_action.Text = "edit";
-                    ButtonDelete.Enabled = true;
-                    break;
 
-                case "add":
-                    Status = "add";
-                    ResetTheTask();
-                    button_action.Text = "add";
-                    ButtonDelete.Enabled = false;
-                    break;
-                }
-        }
         private void ShowTheTask()
         {
             textboxTask.Text = string.Empty;
@@ -121,7 +119,7 @@ namespace TodoList
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            if (Status == "edit")
+            if (Status == Mode.Edit)
             {
                 int id = 1;
                 XMLRepository xMLRepository = new XMLRepository();
