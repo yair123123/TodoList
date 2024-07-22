@@ -36,6 +36,7 @@ namespace TodoList
             Title = title;
             Date = date;
             Done = done;
+            Id = -1;
         }
         public TodoModel() { }
     }

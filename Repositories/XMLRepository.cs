@@ -33,7 +33,7 @@ namespace TodoList.Repositories
                             todoList = new TodoListModel();
                             todoList.Todos.Add(existingTodo);
                         }
-                     _id = todoList.Todos.LastOrDefault().Id;
+                     _id = todoList.Todos.LastOrDefault().Id+1;
                     }
                 }
                 catch (Exception ex)
@@ -49,7 +49,7 @@ namespace TodoList.Repositories
             }
 
 
-            if (todo.Id == null)
+            if (todo.Id == -1)
             {
                 todo.Id = _id++;
             }
