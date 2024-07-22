@@ -1,4 +1,5 @@
 ﻿using ReaLTaiizor.Forms;
+using TodoList.Repositories;
 
 namespace TodoList
 {
@@ -43,12 +44,23 @@ namespace TodoList
             }
         }
 
-        // add or edit based on mode
         private void button_action_Click(object sender, EventArgs e)
         {
-            // נסיון זה הערה שרייניץ רשם
-            //נסיון נוסף
-            //נסיון שלישי
+            AddEvent();
+        }
+
+        private TodoModel AddEvent()
+        {          
+            DateOnly date = DateOnly.FromDateTime(hopeDatePicker.Date);
+            string Task = textboxTask.Text;
+            TodoModel todos = new TodoModel(Task, date);
+
+        }
+
+        private void checkbox_isDone_CheckedChanged(object sender, EventArgs e)
+        {
+            XMLRepository xMLRepository = new XMLRepository();
+            xMLRepository.DeleteById(1);
         }
     }
 }
