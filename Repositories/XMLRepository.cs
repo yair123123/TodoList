@@ -6,30 +6,78 @@ namespace TodoList.Repositories
 {
     internal class XMLRepository : IRepository<TodoModel>
     {
-        public TodoModel Add(TodoModel todo)
+        int _id = 0;
+        public void Add(TodoModel todo)
         {
-            todo.Id = Id+=1;
-            XmlSerializer serializer = new XmlSerializer(typeof(TodoModel));
+            todo.Id = _id++;
+            XmlSerializer listSerializer = new XmlSerializer(typeof(TodoListModel));
+            XmlSerializer itemSerializer = new XmlSerializer(typeof(TodoModel));
+
+            TodoListModel todoList;
+
+            if (File.Exists("todo.xml"))
+            {
+                try
+                {
+                    using (StreamReader reader = new StreamReader("todo.xml"))
+                    {
+                        try
+                        {
+                            todoList = (TodoListModel)listSerializer.Deserialize(reader);
+                        }
+                        catch (InvalidCastException)
+                        { 
+                            TodoModel existingTodo = (TodoModel)itemSerializer.Deserialize(reader);
+                            todoList = new TodoListModel();
+                            todoList.Todos.Add(existingTodo);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error reading XML: {ex.Message}");
+                    todoList = new TodoListModel();
+                }
+            }
+            else
+            {
+                todoList = new TodoListModel();
+            }
+
+            todoList.Todos.Add(todo);
+
             using (StreamWriter writer = new StreamWriter("todo.xml"))
             {
-                serializer.Serialize(writer, todo);
+                listSerializer.Serialize(writer, todoList);
             }
-            XmlSerializer newserializer = new XmlSerializer(typeof(TodoModel));
-            using (StreamReader reader = new StreamReader("todo.xml"))
-            {
-                todo = (TodoModel)serializer.Deserialize(reader);
-            }
-            return todo;
         }
+
 
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
+            XmlSerializer serializer = new XmlSerializer(typeof(TodoListModel));
+            TodoListModel todoList;
+            using (StreamReader reader = new StreamReader("todo.xml"))
+            {
+                todoList = (TodoListModel)serializer.Deserialize(reader);
+                todoList.Todos = todoList.Todos.Where(todo => todo.Id != id).ToList();
+            }
+            using (StreamWriter writer = new StreamWriter("todo.xml"))
+            {
+                serializer.Serialize(writer, todoList);
+            }
         }
 
         public List<TodoModel> GetAll()
         {
-            throw new NotImplementedException();
+            XmlSerializer serializer = new XmlSerializer(typeof(TodoListModel));
+            TodoListModel todoList;
+            using (StreamReader reader = new StreamReader("todo.xml"))
+            {
+                todoList = (TodoListModel)serializer.Deserialize(reader);
+                //todoList.Todos = todoList.Todos.ToList();
+            }
+            return todoList.Todos;
         }
 
         public List<TodoModel> GetAll(Func<TodoModel, bool> predicate)

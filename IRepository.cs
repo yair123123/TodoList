@@ -11,7 +11,7 @@
     {
         T GetById(int id);
         T Update(T todo);
-        T Add(T todo);
+        void Add(T todo);
         void DeleteById(int id);
         List<T> GetAll();
         // get by col and value

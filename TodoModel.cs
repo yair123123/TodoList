@@ -2,7 +2,12 @@
 
 namespace TodoList
 {
-    [XmlRoot("Todo")] 
+    [XmlRoot("TodoList")] 
+    public class TodoListModel
+    {
+        [XmlElement("Todo")]
+        public List<TodoModel> Todos { get; set; } = new List<TodoModel>();
+    }
     public class TodoModel
     {
         [XmlElement("ID")] 
@@ -23,5 +28,6 @@ namespace TodoList
             Date = date;
             Done = done;
         }
+        public TodoModel() { }
     }
 }
