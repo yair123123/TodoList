@@ -149,12 +149,13 @@
             // 
             dataGridView_tasks.AllowUserToAddRows = false;
             dataGridView_tasks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_tasks.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dataGridView_tasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_tasks.Location = new Point(874, 262);
             dataGridView_tasks.Margin = new Padding(7, 5, 7, 5);
             dataGridView_tasks.Name = "dataGridView_tasks";
             dataGridView_tasks.RowHeadersWidth = 51;
-            dataGridView_tasks.Size = new Size(724, 943);
+            dataGridView_tasks.Size = new Size(926, 943);
             dataGridView_tasks.TabIndex = 6;
             dataGridView_tasks.CellContentClick += dataGridView_tasks_CellContentClick;
             // 
@@ -171,7 +172,7 @@
             button_action.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             button_action.Name = "button_action";
             button_action.NoAccentTextColor = Color.Empty;
-            button_action.Size = new Size(85, 36);
+            button_action.Size = new Size(64, 36);
             button_action.TabIndex = 7;
             button_action.Text = "ADD";
             button_action.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
