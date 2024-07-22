@@ -6,8 +6,6 @@ namespace TodoList.Repositories
 {
     internal class XMLRepository : IRepository<TodoModel>
     {
-        public int Id = 0;
-
         public TodoModel Add(TodoModel todo)
         {
             todo.Id = Id+=1;
