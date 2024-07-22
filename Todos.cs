@@ -23,6 +23,10 @@ namespace TodoList
         {
             InitializeComponent();
             todos = new List<TodoModel>();
+            if (!File.Exists("todo.xml"))
+            {
+                xMLRepository.Add(new TodoModel("Bring the Messiah now", DateOnly.FromDateTime(DateTime.Now)));
+            }
             dataGridView_tasks.DataSource = xMLRepository.GetAll();
             dataGridView_tasks.Columns["Date"].Visible = false;
             this.repository = repository;
@@ -31,10 +35,6 @@ namespace TodoList
         private void populateViewWithTodo() { }
 
         // populate form from selected row
-        private void dataGridView_tasks_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void SetMode(Mode mode)
         {
@@ -129,6 +129,18 @@ namespace TodoList
                 XMLRepository xMLRepository = new XMLRepository();
                 xMLRepository.DeleteById(id);
             }
+        }
+        private void dataGridViewDisplay_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show("dataGridViewDisplay_CellClick");
+        }
+        private void dataGridView_tasks_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show(e.RowIndex.ToString());
+            MessageBox.Show("");
+
+            //this.dataGridView_tasks.CurrentRow.Cells[0].Value;
+
         }
     }
 }

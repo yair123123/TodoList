@@ -6,6 +6,7 @@ namespace TodoList.Repositories
 {
     internal class XMLRepository : IRepository<TodoModel>
     {
+        int _id = 0;
 
         public void Add(TodoModel todo)
         {
@@ -32,6 +33,7 @@ namespace TodoList.Repositories
                             todoList = new TodoListModel();
                             todoList.Todos.Add(existingTodo);
                         }
+                     _id = todoList.Todos.LastOrDefault().Id;
                     }
                 }
                 catch (Exception ex)
@@ -47,7 +49,6 @@ namespace TodoList.Repositories
             }
 
 
-            int _id = todoList.Todos.LastOrDefault().Id;
             if (todo.Id == null)
             {
                 todo.Id = _id++;
