@@ -9,6 +9,8 @@ namespace TodoList.Repositories
         int _id = 0;
         public void Add(TodoModel todo)
         {
+            Console.WriteLine(todo.Id);
+
             todo.Id = _id++;
             XmlSerializer listSerializer = new XmlSerializer(typeof(TodoListModel));
             XmlSerializer itemSerializer = new XmlSerializer(typeof(TodoModel));

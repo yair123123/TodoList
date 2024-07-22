@@ -23,7 +23,7 @@ namespace TodoList
         {
             InitializeComponent();
             todos = new List<TodoModel>();
-            dataGridView_tasks.DataSource = todos;
+            dataGridView_tasks.DataSource = xMLRepository.GetAll();
             this.repository = repository;
         }
 
@@ -78,14 +78,6 @@ namespace TodoList
             }
         }
 
-        private void EditEvent()
-        {
-            SetMode(Mode.Edit);
-            // add to xml
-            //and then cgnge back to add mode
-
-            SetMode(Mode.Add);
-        }
 
 
         private void ShowTheTask()
@@ -97,11 +89,20 @@ namespace TodoList
             textboxTask.Text = string.Empty;
         }
 
+        private void EditEvent()
+        {
+            SetMode(Mode.Edit);
+            // add to xml
+            //and then cgnge back to add mode
+            dataGridView_tasks.DataSource = xMLRepository.GetAll();
 
+            SetMode(Mode.Add);
+        }
         private void AddEvent()
         {
             TodoModel myTask = CreateTodoModel();
             xMLRepository.Add(myTask);
+            dataGridView_tasks.DataSource = xMLRepository.GetAll();
         }
 
         private TodoModel CreateTodoModel()
